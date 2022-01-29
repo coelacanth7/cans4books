@@ -70,7 +70,7 @@ $(function () {
     // imageUrlString - img src string
     // h2 - string for h2 hover text
     // p - string for p hover sub text
-    function createGalleryImageTemplateString(sortingClass, imageUrlString, h2, p) {
+    function createGalleryImageTemplateString(sortingClass, imageUrlString, h2, p, id) {
         return `
         <div class="tm-gallery-item ${sortingClass}">
             <figure class="effect-bubba">
@@ -78,7 +78,7 @@ $(function () {
                 <figcaption>
                     ${h2 ? `<h2>${h2}</h2>` : ''}
                     ${p ? `<p>${p}</p>` : ''}
-                    <a href="#">View more</a>
+                    <a href="#${id}" rel="modal:open">Open Modal</a>
                 </figcaption>
             </figure>
         </div>
@@ -98,7 +98,30 @@ $(function () {
             createListSorter(imagesArr);
             createGalleryTiles(dataHolder.arrayOfGallerySorters);
             createISOgallery();
+            createModals(dataHolder.arrayOfGallerySorters);
         }
+    }
+
+    function createModals(params) {
+        const templates = dataHolder.arrayOfGallerySorters.map(function (galleryObj) {
+            return createModalTemplate(galleryObj.id, galleryObj.imgix_url);
+        });
+        templates.forEach(function (templateString) {
+            renderStringBasedOnClass(templateString, 'body', true);
+        });
+    }
+
+    function createModalTemplate(id, imageUrl) {
+        return `
+            <div id="${id}" class="modal">
+                <img src="${imageUrl}" class="modal-image">
+                <a href="#" rel="modal:close">Close</a>
+            </div>
+        `
+    }
+
+    function generateUniqueId() {
+        return 'id' + parseInt(Math.ceil(Math.random() * Date.now()).toPrecision(16).toString().replace(".", ""));
     }
 
     // params
@@ -106,7 +129,8 @@ $(function () {
     function createGalleryTiles(imagesArr) {
         let templates = imagesArr.map(function (imageObj) {
             console.log(imageObj);
-            return createGalleryImageTemplateString(imageObj.metadata.sorter, imageObj.imgix_url, imageObj.metadata.h2, imageObj.metadata.p);
+            imageObj.id = generateUniqueId();
+            return createGalleryImageTemplateString(imageObj.metadata.sorter, imageObj.imgix_url, imageObj.metadata.h2, imageObj.metadata.p, imageObj.id);
         });
         // console.log(templates)
         templates.forEach(function (templateString) {

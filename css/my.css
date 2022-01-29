@@ -15,3 +15,11 @@ p, span, h1, h2, h3, h4, h5, h6 {
 figure.effect-bubba {
     background: #80C8F0!important;
 }
+
+.modal-image {
+    max-width: 100%;
+    max-height: 100%;
+}
+.blocker {
+    z-index: 999999!important;
+}
