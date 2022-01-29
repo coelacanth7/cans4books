@@ -1,0 +1,17 @@
+.tm-bg-color-1 {
+    background-color: #80C8F0;
+}
+p, span, h1, h2, h3, h4, h5, h6 {
+    color: #545454;
+}
+.tm-bg-color-5 {
+    background-color: #FFEDA1;
+}
+
+.tm-nav-item.current .tm-nav-link, .tm-btn, .tm-nav-link:hover {
+    background-color: #b9dfbc;
+}
+
+figure.effect-bubba {
+    background: #80C8F0!important;
+}
