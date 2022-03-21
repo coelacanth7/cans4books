@@ -9,7 +9,7 @@ p, span, h1, h2, h3, h4, h5, h6 {
 }
 
 .tm-nav-item.current .tm-nav-link, .tm-btn, .tm-nav-link:hover {
-    background-color: #b9dfbc;
+    background-color: #8ee895;
 }
 
 figure.effect-bubba {
@@ -22,4 +22,15 @@ figure.effect-bubba {
 }
 .blocker {
     z-index: 999999!important;
+}
+
+.main-logo {
+    height: 100px;
+    width: auto;
+    margin: 20px;
+}
+
+.title-wrap {
+    display: flex;
+    flex-wrap: wrap;
 }
